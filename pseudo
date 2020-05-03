@@ -1,0 +1,73 @@
+---=== project 1: title tbd! ===---
+
+
+
+====ON PAGE LOAD====
+
+background:
+    black, within 2s "spotlight" beams (low opacity white beams, potentially gradient) turn on from top of screen (almost like stage lights) - NO fade in
+        - possible to have fog rolling across bottom of screen?
+title:
+    above center screen, appears 2s after "spotlights" turn on (in same manner as lights)
+    illuminated from behind
+game description:
+    appears centered under the title, same manner as title but 2s delay after title pops
+        - " description " (something along the lines of, 'Each round you'll hear 10s of a song and have to guess the artist ___' etc)
+            - get 10 right, win the game
+'begin' button:
+    fades in underneath the title, add click effect(similar to what was shown during last lesson)
+
+
+====BEGIN BUTTON CLICKED====
+
+background:
+    (1s after Begin click)
+    spotlights turn off
+    title shifts to top of page, scales to half size and centers
+    description fade out
+visual:
+    1s later timer pops up (fades in) to count down from 5
+answer ticker:
+    square in top right fades in same time as 'timer'
+    "SCORE:" text above square
+    analog number ticks up as correct answer is selected, nothing happens if wrong answer selected
+
+
+====GAME BEGIN====
+
+album cover:
+    cover corresponds with song from artist
+    appears above center (pixelated? blurred?)
+    has slight border, glowing white from behind
+    over the course of 10s, image gets clearer (becomes fully clear after 13s OR 1s after answer selection is made)
+    when new 'question' loads, album cover just replaced with slight pulse animation
+song:
+    figure out spotify api!
+    very quick fade in/fade out(possible?)
+    plays for 10s regardless of if answer selection is made
+answer options:
+    4 will appear simultaneous to album art/song changing
+    2x2, slightest 'pulse' animation from center of 4 options 
+        - as though each selection is pulsing towards opposing corners
+    when selection is hovered, (low opacity) glow over button
+        - correct answer selected: button color turns yellow
+        -incorrect answer: button turns red
+
+====WHEN YOU WIN====
+
+everything fades out
+    - answers
+    - album cover
+    - music stops
+winning text: 
+    pops 2s after everything fades out
+    " you have excellent taste gj! " <-- gonna decide winning message
+    fades into screen center, large text, glowing(pulsing?) from behind
+replay button:
+    fades in 3s after winning text appears
+        - centered, beneath winning text
+    has click animation
+
+
+
+
