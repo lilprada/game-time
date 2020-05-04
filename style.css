@@ -1,3 +1,5 @@
+/* This product uses the TMDb API but is not endorsed or certified by TMDb. */
+
 *,
 *::after,
 *::before {
@@ -30,11 +32,12 @@ html {
     font-family: 'Oswald', sans-serif;
     font-size: 20vw;
     text-align: center;
-    text-shadow: 1px -1px rgb(138, 1, 1), 2px -2px rgb(138, 1, 1), 3px -3px rgb(138, 1, 1), 4px -4px rgb(138, 1, 1), 5px -5px rgb(138, 1, 1), 6px -6px rgb(138, 1, 1), 7px -7px rgb(138, 1, 1), 8px -8px rgb(138, 1, 1), 9px -9px rgb(138, 1, 1);
+    text-shadow: 1px -1px rgb(109, 1, 1), 2px -2px rgb(138, 1, 1), 3px -3px rgb(138, 1, 1), 4px -4px rgb(138, 1, 1), 5px -5px rgb(138, 1, 1), 6px -6px rgb(138, 1, 1), 7px -7px rgb(138, 1, 1), 8px -8px rgb(138, 1, 1), 9px -9px rgb(138, 1, 1);
+    animation: moveTop 3s;
   }
   h1:hover {
     color: rgb(138, 1, 1);
-    text-shadow: 1px -1px rgb(206, 25, 25), 2px -2px rgb(206, 25, 25), 3px -3px rgb(206, 25, 25), 4px -4px rgb(206, 25, 25), 5px -5px rgb(206, 25, 25), 6px -6px rgb(206, 25, 25), 7px -7px rgb(206, 25, 25), 8px -8px rgb(206, 25, 25), 9px -9px rgb(206, 25, 25);
+    text-shadow: 1px -1px rgb(109, 1, 1), 2px -2px rgb(206, 25, 25), 3px -3px rgb(206, 25, 25), 4px -4px rgb(206, 25, 25), 5px -5px rgb(206, 25, 25), 6px -6px rgb(206, 25, 25), 7px -7px rgb(206, 25, 25), 8px -8px rgb(206, 25, 25), 9px -9px rgb(206, 25, 25);
 
   }
   
@@ -57,43 +60,51 @@ html {
     left:auto;
     right:0;
   }
+  /* beams sourced from codepen */
 
   .header__descrip{
       margin: 0 auto;
-      font-size: 1.7vw;
+      font-size: 1.5vw;
       text-align: center;
-      color: rgb(255, 255, 255);
+      color: rgb(219, 219, 219);
       width: 30%;
       border-radius: 20px;
-      font-family: 'Assistant', sans-serif;
+      font-family: 'Heebo', sans-serif;
+      padding: -10px 0 0 0;
       animation: glowing-descrip 2s ease-in-out infinite alternate;
+
       /* i dont like this font, need to find better one!*/
 
   }
-  .header__start-btn {
-      position: absolute;
+  #start-btn {
+      position: relative;
+      margin: 40px auto;
       font-family: 'Assistant', sans-serif;
       font-size: 1.3vw;
       color: #777;
       background: rgb(245, 245, 245);
+      opacity: .85;
       border-radius: 40px;
       padding: 5px 15px;
       height: 30px;
       width: 15%;
-      /* center button! margin: 0 auto not working */
+      text-align: center;
+      text-decoration: none;
+      /* how to get equal padding top/bottom? */
   }
-  .header__start-btn:hover {
-    transform: translateY(-.3rem);
+  #start-btn:hover {
+    opacity: 1;
     cursor: pointer;
     box-shadow: 0 1rem 2rem rgb(206, 25, 25, 0.4);
     color: rgb(206, 25, 25);
+    animation: buttonBounce 1.5s infinite;
   }
-  .header__start-btn:hover::after {
-    background-color: rgb(206, 25, 25);
-    color: white;
-    animation: button-drop 2s ease-out .4s;
+  #start-btn:hover::after {
+    animation: startClick 4s ease-in-out;
+    } 
+
     /* when clicked---- no movement? */
-  }
+  
 
 
 
@@ -128,19 +139,53 @@ html {
     }
   }
 
-  @keyframes button-drop {
+  @keyframes glowing-descrip {
+    from {
+        text-shadow: 0 0 5px rgb(0, 0, 0), 0 0 10px rgb(255, 255, 255), 0 0 15px #555555, 0 0 20px #575757, 0 0 25px #6b6b6b;
+      }
+      to {
+        text-shadow: 0 0 5px rgb(0, 0, 0), 0 0 10px rgb(255, 255, 255), 0 0 15px rgb(0, 0, 0), 0 0 20px rgb(0, 0, 0), 0 0 25px rgb(0, 0, 0);
+      }
+    }
+
+    @keyframes moveTop {
+      0% {
+          opacity: 0;
+          transform: translateY(-3rem);
+      }
+      70% {
+          opacity: 0.5;
+          transform: translateY(.1rem);
+      }
       100% {
-          transform: translate(-.9rem);
-          opacity: 0%;
+          opacity: 1;
+          transform: translate(0);
       }
   }
 
-  @keyframes glowing-descrip {
-    from {
-        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #dabd3e, 0 0 20px #dabd3e, 0 0 25px #dabd3e;
+    @keyframes buttonBounce {
+      0% {
+        transform: translateY(-.1rem);
       }
-      to {
-        text-shadow: 0 0 5px #fff, 0 0 10px rgb(255, 199, 13), 0 0 15px rgb(255, 199, 13), 0 0 20px rgb(255, 199, 13), 0 0 25px rgb(255, 199, 13);
+      25% {
+        transform: translateY(-.3rem);
+      }
+      50% {
+        transform: translateY(-.1rem);
+      }
+      75% {
+        transform: translateY(-.3rem);
+      }
+      100% {
+        transform: translateY(-.1rem);
       }
     }
-  
+
+    @keyframes startClick {
+      30% {
+        transform: scaleX(100%);
+      }
+      100% {
+        transform: scaleY(100%);
+      }
+    }
