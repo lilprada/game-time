@@ -1,0 +1,146 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    cursor: default;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    box-sizing: border-box;
+}
+
+/* body {
+    background: black;
+} */
+
+html {
+    background-image: linear-gradient(rgb(20, 20, 20), rgb(98, 98, 114));
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  h1 {
+    color: rgb(206, 25, 25);
+    font-family: 'Oswald', sans-serif;
+    font-size: 20vw;
+    text-align: center;
+    text-shadow: 1px -1px rgb(138, 1, 1), 2px -2px rgb(138, 1, 1), 3px -3px rgb(138, 1, 1), 4px -4px rgb(138, 1, 1), 5px -5px rgb(138, 1, 1), 6px -6px rgb(138, 1, 1), 7px -7px rgb(138, 1, 1), 8px -8px rgb(138, 1, 1), 9px -9px rgb(138, 1, 1);
+  }
+  h1:hover {
+    color: rgb(138, 1, 1);
+    text-shadow: 1px -1px rgb(206, 25, 25), 2px -2px rgb(206, 25, 25), 3px -3px rgb(206, 25, 25), 4px -4px rgb(206, 25, 25), 5px -5px rgb(206, 25, 25), 6px -6px rgb(206, 25, 25), 7px -7px rgb(206, 25, 25), 8px -8px rgb(206, 25, 25), 9px -9px rgb(206, 25, 25);
+
+  }
+  
+  .light {
+    animation:top-right 5s ease-in-out alternate infinite;
+    border-bottom:none;
+    border-left:solid 20vh transparent;
+    border-right:solid 20vh transparent;
+    border-top:solid 200vh rgba(255, 255, 255, .5);
+    bottom:0;
+    height:0;
+    left:0;
+    position:absolute;
+    transform-origin:bottom;
+    width:0;
+  }
+  
+  .light + .light {
+    animation:top-left 4s ease-in-out alternate infinite;
+    left:auto;
+    right:0;
+  }
+
+  .header__descrip{
+      margin: 0 auto;
+      font-size: 1.7vw;
+      text-align: center;
+      color: rgb(255, 255, 255);
+      width: 30%;
+      border-radius: 20px;
+      font-family: 'Assistant', sans-serif;
+      animation: glowing-descrip 2s ease-in-out infinite alternate;
+      /* i dont like this font, need to find better one!*/
+
+  }
+  .header__start-btn {
+      position: absolute;
+      font-family: 'Assistant', sans-serif;
+      font-size: 1.3vw;
+      color: #777;
+      background: rgb(245, 245, 245);
+      border-radius: 40px;
+      padding: 5px 15px;
+      height: 30px;
+      width: 15%;
+      /* center button! margin: 0 auto not working */
+  }
+  .header__start-btn:hover {
+    transform: translateY(-.3rem);
+    cursor: pointer;
+    box-shadow: 0 1rem 2rem rgb(206, 25, 25, 0.4);
+    color: rgb(206, 25, 25);
+  }
+  .header__start-btn:hover::after {
+    background-color: rgb(206, 25, 25);
+    color: white;
+    animation: button-drop 2s ease-out .4s;
+    /* when clicked---- no movement? */
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  /* 
+  ===== KEYFRAMES =====
+   */
+  
+  @keyframes top-right {
+    0% {
+      transform: rotate(-10deg);
+    }
+    100% {
+      transform: rotate(70deg);
+    }
+  }
+  
+  @keyframes top-left {
+    0% {
+      transform: rotate(10deg);
+    }
+    100% {
+      transform: rotate(-70deg);
+    }
+  }
+
+  @keyframes button-drop {
+      100% {
+          transform: translate(-.9rem);
+          opacity: 0%;
+      }
+  }
+
+  @keyframes glowing-descrip {
+    from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #dabd3e, 0 0 20px #dabd3e, 0 0 25px #dabd3e;
+      }
+      to {
+        text-shadow: 0 0 5px #fff, 0 0 10px rgb(255, 199, 13), 0 0 15px rgb(255, 199, 13), 0 0 20px rgb(255, 199, 13), 0 0 25px rgb(255, 199, 13);
+      }
+    }
+  
