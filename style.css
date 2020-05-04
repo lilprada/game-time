@@ -62,7 +62,7 @@ html {
   }
   /* beams sourced from codepen */
 
-  .header__descrip{
+  #descrip {
       margin: 0 auto;
       font-size: 1.5vw;
       text-align: center;
