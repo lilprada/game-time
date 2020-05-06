@@ -35,6 +35,8 @@
             <div class="light"></div>   -->
                 <!-- <div id="descrip">Each round you'll be provided with a blurred movie poster, a brief plot summary, and 10 seconds to guess the film. If you get 3 wrong, you lose -- 10 correct answers wins the game!</div> -->
                 <div id="start-btn">START</div>
+                <div id="points"></div>
+                <div id="info"></div>
         </div>
 
         <!--== POSTER IMAGE/SUMMARY ==-->
@@ -45,15 +47,26 @@
         </ul>
         
         <!--== WINNING SCREEN ==-->
-            <!-- <div class="overlay-cover" id="end-game" style="display:none">
-                <p>Look at how cultured you are! Want to flex those Relevance Muscles again?</p>
-                <button class="restart" id="win-restart">GO AGAIN</button>
-            </div> -->
+            <div class="overlay-cover" id="end-game" style="display:none">
+                <div class="modal">
+                    <div id="modal-win">
+                        <h2>GOOD WORK FRIEND</h2>
+                        <p>You're cultured, you're relevant, you're wise. Keep at it, nerd!</p>
+                        <div id="restart-btn"></div>
+                    </div>
+                </div>
+            </div>
         
         <!--== LOSING SCREEN ==-->
-            <!-- <div class="overlay-cover" id="lose-game" style="display:none">
-                
-            </div> -->
+            <div class="overlay-cover" id="lose-game" style="display:none">
+                <div class="modal">
+                    <div id="modal-loss">
+                        <h2>WHAT THE HELL MAN</h2>
+                        <p>Turn on a computer!!! Look at your phone!! Read a paper!!! Fuck!!!!!!</p>
+                        <div id="restart-btn"></div>
+                    </div>
+                </div>
+            </div> 
 
 </div>
 </div>
