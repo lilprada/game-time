@@ -1,4 +1,7 @@
-/////////////COMMENT THRU THIS TMR TO PREP FOR PRESENTATION, STYLING!
+//i wish i had been able to display a timer that counted down
+//also wish i had been able to make it so that 'movie' and 'selections' divs didnt shift downwards each time the 'results' text pops
+//how to make it so background doesnt tile?
+//game breaks if you just click through 'next question' to the end without answering anything - not sure why!
 
 let movie;
 let movies;
@@ -17,6 +20,8 @@ const $missBoard = $('<div>').text(strikes).appendTo($('#points'));
 const $winModal = $('#end-game');
 const $lossModal = $('#lose-game');
 
+//function to make effects happen on load items when "start" is clicked (if no movie, have these animations - as not to repeat every time the start button is clicked)
+
 function initiateQuestion() {
     if (!movie) {
         $('#descrip').fadeOut(100);
@@ -27,6 +32,8 @@ function initiateQuestion() {
             .hide()
             .fadeIn(1000);
     }   
+
+    //random movie generator from array - pushes tmpMovie (movie displayed during question) to an array called usedMovieIds
 
     if (!movies.length) { return; }
     movie = null;
@@ -40,6 +47,8 @@ function initiateQuestion() {
             usedMovieIds.push(tmpMovie.id);
         }    
     }
+     
+    //resets timer/answer options/"results" (i.e. 'correct', 'incorrect' upon pressing Next Question button)
 
     clearPreviousData();
     populateAnswers();
@@ -50,6 +59,8 @@ function initiateQuestion() {
     blurMoviePoster(20);
     $('.light').fadeOut(2000);
 }
+
+//blurs movie poster, sourced from stackoverflow
 
 function blurMoviePoster(size) {
     var filterVal = 'blur(' + size + 'px)';
@@ -67,6 +78,8 @@ function blurMoviePoster(size) {
 
 }
 
+//shuffles array of movies at random
+
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -76,6 +89,8 @@ function shuffleArray(array) {
     }
 }
 
+//upon clicking an answer, the timer is stopped, the movie is unblurred and the answer is revealed.
+
 function handleAnswerClick(clickedAnswer) {
     clearInterval(timer);
     blurMoviePoster(0);
@@ -84,6 +99,7 @@ function handleAnswerClick(clickedAnswer) {
         return;
     }
 
+    //the tmpMovie is always assigned a class of 'correct'
     $(".selections").find(`li:contains("${movie.title}")`).addClass("correct");
 
     if(clickedAnswer === movie.title) {
@@ -94,16 +110,23 @@ function handleAnswerClick(clickedAnswer) {
 
     answerSelected = true;
 
+    //as long as score is not equivalent to 10 or strikes are not equivalent to 3, button reads 'next question'
     if (strikes !== 3 && score !== 10) {
         $('#start-btn').text('NEXT QUESTION');
     }
 }
+
+//if no answer is selected, the info is still cleared
 
 function clearPreviousData() {
     $(".selections").html("");
     $('#info').html("");
     answerSelected = false;
 }
+
+//function to handle response if incorrect answer is selected
+    //text response, strikes +1
+    //if strikes reach 3, loss modal pops
 
 function handleIncorrectAnswer(clickedAnswer) {
     $('<div>').attr('id', 'incorrect').text('Wrong! IDiot!').appendTo('#info');
@@ -119,6 +142,10 @@ function handleIncorrectAnswer(clickedAnswer) {
     }
 }
 
+//function to handle response if correct answer is selected
+    //text response, score +1
+    //if score = 10, win modal pops
+
 function handleCorrectAnswer() {
     $('<div>').attr('id', 'correct').text('Correct!').appendTo('#info');
     score += 1;
@@ -129,7 +156,7 @@ function handleCorrectAnswer() {
     }
 }
 
-
+//function to assign incorrect answers to other 3 choices -  if selected answer does not equal movie title, send it back to answers array to be used again (only movies being sent to usedMovieIds will not be displayed again in question). 
     
 function populateAnswers() {
     answers = [];
@@ -141,10 +168,11 @@ function populateAnswers() {
             answers.push(tmpIncorrectMovie.title);
         }
     }
-
+    //pushes movie.title to answers regardless so that it can be used as answer optino
     answers.push(movie.title);
     shuffleArray(answers);
 
+    //turns li into clickable buttons (click, event)
     answers.forEach((answer) => {
         const $button = $('<li>').text(answer);
         $button.on('click', (event) => {
@@ -154,6 +182,8 @@ function populateAnswers() {
         $('.selections').append($button);
     })
 }
+
+//function to reset/start 10s timer, and what happens if timer runs out (blur vanishes, correct answer is highlighted, incorrectanswer function is called [strikes +1, 'incorrect' response pops])
 
 function resetAndStartTimer() {
     clearInterval(timer);
@@ -175,6 +205,8 @@ function resetAndStartTimer() {
     }, 1000);
 }
 
+//api for tmdb - trending movies of the week
+
 $.ajax({
     url: "https://api.themoviedb.org/3/trending/movie/week?api_key=0f56884bfabe1fe77e2440f8a73e73ee",
     type: "GET",
@@ -182,10 +214,12 @@ $.ajax({
     movies = response.results;
 });
 
+//click start button to call on initiateQuestion function
 $( "#start-btn" ).click(function() {
     initiateQuestion();
 });
 
+//restart button within modals, resets scores and also performs initiateQuestion function
 $(".restart-btn").click(function() {
     $winModal.css('display', 'none');
     $lossModal.css('display', 'none');
