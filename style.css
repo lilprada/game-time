@@ -17,14 +17,9 @@ body {
     box-sizing: border-box;
 }
 
-/* body {
-  background-image: linear-gradient(rgb(20, 20, 20), rgb(98, 98, 114));
-} */
-
   html {
     background-image: linear-gradient(rgb(20, 20, 20), rgb(98, 98, 114));
     height: 100%;
-    /* overflow: hidden; */
   }
   
   h1 {

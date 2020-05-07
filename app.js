@@ -47,7 +47,8 @@ function initiateQuestion() {
 
     let $posterDiv = $('.movie').html(`<img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}"><p>${movie.overview}</p>`);
 
-    blurMoviePoster(20)
+    blurMoviePoster(20);
+    $('.light').fadeOut(2000);
 }
 
 function blurMoviePoster(size) {
