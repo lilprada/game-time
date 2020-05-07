@@ -12,13 +12,59 @@ let answerSelected = false;
 
 const $scoreboard = $('<div>').text(score).appendTo($('#points'));
 const $missBoard = $('<div>').text(strikes).appendTo($('#points'));
-const $replayButton = $('<div>').text('PLAY AGAIN').appendTo($('#info')).hide();
-let $posterDiv = $('.movie').html(`<img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}"><p>${movie.overview}</p>`);
-
-
+// let $posterDiv = $('.movie').html(`<img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}"><p>${movie.overview}</p>`);
 
 const $winModal = $('#end-game');
 const $lossModal = $('#lose-game');
+
+function initiateQuestion() {
+    if (!movie) {
+        $('#descrip').fadeOut(100);
+        var curr_font_size = $('.title').css('font-size');
+        var new_font_size = parseFloat(curr_font_size) - 150;
+        $('.title').animate({fontSize: new_font_size}, 1000);
+        $('#points').css("display", "flex")
+            .hide()
+            .fadeIn(1000);
+    }   
+
+    if (!movies.length) { return; }
+    movie = null;
+
+    const totalMovies = movies.length;
+
+    while (!movie) {
+        const tmpMovie = movies[Math.floor(Math.random() * movies.length)];
+        if (!usedMovieIds.includes(tmpMovie.id)) {
+            movie = tmpMovie;
+            usedMovieIds.push(tmpMovie.id);
+        }    
+    }
+
+    clearPreviousData();
+    populateAnswers();
+    resetAndStartTimer();
+
+    let $posterDiv = $('.movie').html(`<img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}"><p>${movie.overview}</p>`);
+
+    blurMoviePoster(20)
+}
+
+function blurMoviePoster(size) {
+    var filterVal = 'blur(' + size + 'px)';
+     $(".movie img").css({
+       'filter':filterVal,
+       'webkitFilter':filterVal,
+       'mozFilter':filterVal,
+       'oFilter':filterVal,
+       'msFilter':filterVal,
+       'transition':'all 0.5s ease-out',
+       '-webkit-transition':'all 0.5s ease-out',
+       '-moz-transition':'all 0.5s ease-out',
+       '-o-transition':'all 0.5s ease-out'
+   });
+
+}
 
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
@@ -31,6 +77,7 @@ function shuffleArray(array) {
 
 function handleAnswerClick(clickedAnswer) {
     clearInterval(timer);
+    blurMoviePoster(0);
 
     if (answerSelected) {
         return;
@@ -51,7 +98,6 @@ function handleAnswerClick(clickedAnswer) {
     }
 }
 
-
 function clearPreviousData() {
     $(".selections").html("");
     $('#info').html("");
@@ -59,11 +105,11 @@ function clearPreviousData() {
 }
 
 function handleIncorrectAnswer(clickedAnswer) {
-    $('<div>').text('Wrong! IDiot!').appendTo('#info');
+    $('<div>').attr('id', 'incorrect').text('Wrong! IDiot!').appendTo('#info');
     if (clickedAnswer) {
         $(".selections").find(`li:contains("${clickedAnswer}")`).addClass("incorrect");
     }
-    $('<div>').text(`it's ${movie.title}, Lol yikes`).appendTo($('#info'));
+    $('<div>').attr('id', 'answer').text(`it's ${movie.title}, Lol yikes`).appendTo($('#info'));
     strikes += 1;
     $missBoard.text(strikes);
 
@@ -73,7 +119,7 @@ function handleIncorrectAnswer(clickedAnswer) {
 }
 
 function handleCorrectAnswer() {
-    $('<div>').text('Correct!').appendTo('#info');
+    $('<div>').attr('id', 'correct').text('Correct!').appendTo('#info');
     score += 1;
     $scoreboard.text(score);
 
@@ -81,6 +127,8 @@ function handleCorrectAnswer() {
         $winModal.css('display', 'block');
     }
 }
+
+
     
 function populateAnswers() {
     answers = [];
@@ -112,7 +160,10 @@ function resetAndStartTimer() {
 
     timer = setInterval(function() {
         timerCounter++;
-        console.log(timerCounter);
+
+        const amountToBlur = (-1 * (timerCounter / 10) + 1) * 20;
+        blurMoviePoster(amountToBlur);
+
         if (timerCounter === 10) {
             clearInterval(timer);
             
@@ -131,23 +182,17 @@ $.ajax({
 });
 
 $( "#start-btn" ).click(function() {
-    if (!movies.length) { return; }
-    movie = null;
+    initiateQuestion();
+});
 
-    const totalMovies = movies.length;
+$(".restart-btn").click(function() {
+    $winModal.css('display', 'none');
+    $lossModal.css('display', 'none');
 
-    while (!movie) {
-        const tmpMovie = movies[Math.floor(Math.random() * movies.length)];
-        if (!usedMovieIds.includes(tmpMovie.id)) {
-            movie = tmpMovie;
-            usedMovieIds.push(tmpMovie.id);
-        }    
-    }
+    score = 0;
+    strikes = 0;
+    $scoreboard.text(score);
+    $missBoard.text(strikes);
 
-    clearPreviousData();
-    populateAnswers();
-    resetAndStartTimer();
-
-    let $posterDiv = $('.movie').html(`<img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}"><p>${movie.overview}</p>`);
-    
+    initiateQuestion();
 });

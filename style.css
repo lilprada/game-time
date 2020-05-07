@@ -18,13 +18,13 @@ body {
 }
 
 /* body {
-    background: black;
+  background-image: linear-gradient(rgb(20, 20, 20), rgb(98, 98, 114));
 } */
 
-html {
-    /* background-image: linear-gradient(rgb(20, 20, 20), rgb(98, 98, 114)); */
+  html {
+    background-image: linear-gradient(rgb(20, 20, 20), rgb(98, 98, 114));
     height: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
   
   h1 {
@@ -63,11 +63,13 @@ html {
   /* beams sourced from codepen */
 
   .selections li.correct {
-    border: 1px solid green;
+    background-color: rgb(0, 117, 0);
+    box-shadow: 0 0 2rem white;
+
   }
 
   .selections li.incorrect {
-    border: 1px solid red;
+    background-color: rgb(156, 0, 0);
   }
 
   #descrip {
@@ -81,7 +83,6 @@ html {
       padding: -10px 0 0 0;
       animation: glowing-descrip 2s ease-in-out infinite alternate;
 
-      /* i dont like this font, need to find better one!*/
 
   }
   #start-btn {
@@ -98,27 +99,136 @@ html {
       width: 15%;
       text-align: center;
       text-decoration: none;
-      /* how to get equal padding top/bottom? */
+      border: 2px solid rgb(206, 25, 25, 0.4);
   }
   #start-btn:hover {
     opacity: 1;
     cursor: pointer;
-    box-shadow: 0 1rem 2rem rgb(206, 25, 25, 0.4);
+    box-shadow: 0 1rem 1rem rgb(206, 25, 25, 0.4);
     color: rgb(206, 25, 25);
     animation: buttonBounce 1.5s infinite;
   }
-  #start-btn:hover::after {
-    animation: startClick 4s ease-in-out;
-    } 
 
- 
-
-    /* when clicked---- no movement? */
+  #points {
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 30px;
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: space-evenly;
+    padding-bottom: 10px;
+    padding-top: -20px;
+    
+  }
   
+  .movie img {
+    width: 200px;
+    margin: 0 auto;
+    display: block;
+    outline: .5px solid white;
+    box-shadow: 0 0 3rem rgb(206, 25, 25, 0.4);
 
+  }
+  
+  .movie p {
+    color: white;
+    width: 50%;
+    margin: 0 auto;
+    font-family: 'Heebo', sans-serif;
+    font-size: 14px;
+    padding-top: 15px;
+  }
 
+  #incorrect {
+    color: rgb(194, 3, 3);
+    text-shadow: 1px 1px rgb(156, 0, 0);
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 18px;
+    animation: glowing-descrip 2s ease-in-out infinite alternate;
+  }
+  #correct {
+    color: rgb(6, 185, 0);
+    text-shadow: 1px 1px rgb(0, 117, 0);
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 18px;
+    animation: glowing-descrip 2s ease-in-out infinite alternate;
+    padding-bottom: 10px;
+  }
+  #answer {
+    color: white;
+    text-shadow: 1px 1px rgb(156, 0, 0);
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    padding-bottom: 10px;
+  }
 
+  .selections {
+    display: flex; 
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px 0 20px 0;
+  }
+  li {
+    background-color: rgb(35, 123, 255);
+    border: 2px solid rgb(163, 163, 163);
+    border-radius: 20px;
+    color: white;
+    list-style: none;
+    padding: 5px 8px;
+    font-size: 13px;
+    font-family: 'Heebo', sans-serif;
+    cursor: pointer;
+  }
 
+  #modal-loss, #modal-win {
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 300px;
+    width: 400px;
+    text-align: center;
+	  z-index: 1;
+    overflow: auto;
+    border: 2px solid rgb(133, 3, 3);
+    border-radius: 20px;
+    margin: auto;
+  }
+  #modal-loss p, #modal-win p {
+    font-family: 'Heebo', sans-serif;
+    font-size: 22px;
+    text-align: center;
+    padding: 0 0 30px 0;
+  }
+  #modal-loss h2, #modal-win h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 35px;
+    text-shadow: 1px 1px rgb(192, 192, 192), 2px 2px rgb(192, 192, 192), 3px 3px rgb(192, 192, 192);
+    padding: 50px 0 30px 0;
+    text-align: center;
+  }
+  .restart-btn {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: 30px;
+    box-shadow: 0 0 1rem black;
+    font-family: 'Assistant', sans-serif;
+    font-size: 14px;
+    padding: 3px;
+    width: 200px;
+    cursor: pointer;
+    animation: buttonBounce 1.5s infinite;
+    margin: 0 auto;
+    
+  }
 
 
 
