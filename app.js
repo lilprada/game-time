@@ -1,4 +1,4 @@
-//i wish i had been able to display a timer that counted down
+//wish i had been able to display a timer that counted down
 //also wish i had been able to make it so that 'movie' and 'selections' divs didnt shift downwards each time the 'results' text pops
 //how to make it so background doesnt tile?
 //game breaks if you just click through 'next question' to the end without answering anything - not sure why!
